@@ -14,7 +14,9 @@ import {
 } from "./pages/EventDetail";
 import PostRoot from "./pages/blogposts/PostRoot";
 import Posts from "./pages/blogposts/Posts";
-import { action as NewEventAction } from "./pages/NewEvent";
+import { action as manipulateEventAction } from "./components/EventForm/EventForm";
+import NewsletterPage from "./pages/Newsletter";
+import { action as NewsletterAction } from "./pages/Newsletter";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,12 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
+      {
+        path: "newsletter",
+        element: <NewsletterPage />,
+        action: NewsletterAction,
+      },
+
       {
         path: "posts",
         element: <PostRoot />,
@@ -47,10 +55,14 @@ const router = createBrowserRouter([
                 element: <EventDetail />,
                 action: deleteEventAction,
               },
-              { path: "edit", element: <EditEventPage /> },
+              {
+                path: "edit",
+                element: <EditEventPage />,
+                action: manipulateEventAction,
+              },
             ],
           },
-          { path: "new", element: <NewEvent />, action: NewEventAction },
+          { path: "new", element: <NewEvent />, action: manipulateEventAction },
         ],
       },
     ],

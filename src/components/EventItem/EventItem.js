@@ -2,14 +2,14 @@ import classes from "./EventItem.module.css";
 import { Link, useSubmit } from "react-router-dom";
 
 function EventItem({ event }) {
-  const submit = useSubmit();
+  const submit = useSubmit(); //
 
-  function startDeleteHandler() {
+  function deleteHandler() {
     const proceed = window.confirm("are you sure?");
 
     if (proceed) {
-      // using our actions programatically instead of using functions for the same
-      // submit(data,config==method)
+      // allows us to trigger actions without a form
+      //submit(data,{config})
       submit(null, { method: "delete" });
     } else {
       return;
@@ -24,7 +24,7 @@ function EventItem({ event }) {
       <p>{event.description}</p>
       <menu className={classes.actions}>
         <Link to="edit">Edit</Link>
-        <button onClick={startDeleteHandler}>Delete</button>
+        <button onClick={deleteHandler}>Delete</button>
       </menu>
     </article>
   );

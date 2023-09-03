@@ -25,7 +25,7 @@ export default function EventDetail() {
   );
 }
 
-export const loader = async ({ req, params }) => {
+export const loader = async ({ request, params }) => {
   // console.log(req);
   // console.log(params);
   const eventId = params.eventId;
@@ -45,12 +45,12 @@ export const loader = async ({ req, params }) => {
 export const action = async ({ request, params }) => {
   const eventId = params.eventId;
   const response = await fetch(`http://localhost:8080/events/${eventId}`, {
-    method: "DELETE",
+    method: request.method,
   });
 
   if (!response.ok) {
     return json(
-      { message: "could not fetch individial event data" },
+      { message: "not able to delete event" },
       { status: 500 }
     );
   } else {
